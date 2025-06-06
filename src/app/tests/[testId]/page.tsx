@@ -79,12 +79,6 @@ const generateBasicReport = (submittedTest: TestSet): TestAnalysisReport => {
   };
 };
 
-// Add generateStaticParams function for static export
-export async function generateStaticParams() {
-  // Return empty array for static export - pages will be generated on demand
-  return [];
-}
-
 export default function TestTakingPage() {
   const { user, loading: authLoading } = useAuth();
   const router = useRouter();

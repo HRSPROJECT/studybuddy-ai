@@ -31,12 +31,6 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-// Add generateStaticParams function for static export
-export async function generateStaticParams() {
-  // Return empty array for static export - pages will be generated on demand
-  return [];
-}
-
 const flashcardSchema = z.object({
   frontText: z.string().min(1, "Front text is required").max(500, "Front text is too long"),
   backText: z.string().min(1, "Back text is required").max(1000, "Back text is too long"),
