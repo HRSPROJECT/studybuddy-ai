@@ -407,15 +407,16 @@ export default function TestTakingPage() {
             <div className="text-lg font-semibold mb-3">
               <ReactMarkdown
                 components={{
-                  p: ({node, ...props}) => <span className="inline" {...props} />, // Render paragraphs as inline spans to avoid extra margins
-                  code: ({node, inline, className, children, ...props}) => {
+                  p: (props) => <span className="inline" {...props} />,
+                  code: (props) => {
+                    const { inline, className, children, ...rest } = props as any;
                     const match = /language-(\w+)/.exec(className || '')
                     return !inline && match ? (
-                      <pre className={cn("font-code my-1 p-1 text-sm bg-muted text-muted-foreground rounded", className)} {...props}>
+                      <pre className={cn("font-code my-1 p-1 text-sm bg-muted text-muted-foreground rounded", className)}>
                         <code>{String(children).replace(/\n$/, '')}</code>
                       </pre>
                     ) : (
-                      <code className={cn("font-code px-1 py-0.5 text-sm bg-muted text-muted-foreground rounded",className)} {...props}>
+                      <code className={cn("font-code px-1 py-0.5 text-sm bg-muted text-muted-foreground rounded",className)} {...rest}>
                         {children}
                       </code>
                     )
@@ -525,7 +526,7 @@ export default function TestTakingPage() {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                 <AlertDialogCancel>Stay in Test</AlertDialogCancel>
-                <AlertDialogAction onClick={() => router.push('/tests')} variant="destructive">
+                <AlertDialogAction onClick={() => router.push('/tests')}>
                     Exit Test
                 </AlertDialogAction>
                 </AlertDialogFooter>
@@ -616,15 +617,16 @@ export default function TestTakingPage() {
                         <div className="text-sm text-foreground">
                             <ReactMarkdown
                                 components={{
-                                  p: ({node, ...props}) => <span className="inline" {...props} />,
-                                  code: ({node, inline, className, children, ...props}) => {
+                                  p: (props) => <span className="inline" {...props} />,
+                                  code: (props) => {
+                                    const { inline, className, children, ...rest } = props as any;
                                     const match = /language-(\w+)/.exec(className || '')
                                     return !inline && match ? (
-                                      <pre className={cn("font-code my-1 p-1 text-sm bg-muted text-muted-foreground rounded", className)} {...props}>
+                                      <pre className={cn("font-code my-1 p-1 text-sm bg-muted text-muted-foreground rounded", className)}>
                                         <code>{String(children).replace(/\n$/, '')}</code>
                                       </pre>
                                     ) : (
-                                      <code className={cn("font-code px-1 py-0.5 text-sm bg-muted text-muted-foreground rounded",className)} {...props}>
+                                      <code className={cn("font-code px-1 py-0.5 text-sm bg-muted text-muted-foreground rounded",className)} {...rest}>
                                         {children}
                                       </code>
                                     )
